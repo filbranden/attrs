@@ -4,6 +4,7 @@
 Tests for `attr.converters`.
 """
 
+import inspect
 import pickle
 
 import pytest
@@ -270,6 +271,12 @@ class TestPipe:
                 attr.fields(C).x.converter.__call__
             ).get_return_type()
         )
+
+    def test_signature(self):
+        """
+        Confirm the inspect.signature() of pipe says it takes 3 argsuments.
+        """
+        assert 3 == len(inspect.signature(pipe(str, to_bool, bool)).parameters)
 
 
 class TestToBool:

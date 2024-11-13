@@ -2770,6 +2770,13 @@ class Converter:
         """
         self.__init__(**state)
 
+    if not PY_3_11_PLUS:
+        import inspect
+
+        __signature__ = inspect.Signature.from_callable(
+            lambda val, inst, field: None
+        )
+
 
 _f = [
     Attribute(
